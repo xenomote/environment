@@ -1,12 +1,11 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Map {
     private final Area area;
     private final HashMap<Position, Tile> activeTiles;
-    private final MapGenerator generator;
+    private final TileGenerator generator;
 
-    public Map(Area area, MapGenerator generator) {
+    public Map(Area area, TileGenerator generator) {
         this.area = area;
         this.activeTiles = new HashMap<>();
         this.generator = generator;

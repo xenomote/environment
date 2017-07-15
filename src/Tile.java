@@ -16,4 +16,12 @@ public class Tile {
     public ArrayList<MapEntity> getEntities() {
         return entities;
     }
+
+    public void addEntity(MapEntity entity) {
+        entities.add(entity);
+    }
+
+    public void removeEntity(MapEntity entity) {
+        entities.remove(entity);
+    }
 }

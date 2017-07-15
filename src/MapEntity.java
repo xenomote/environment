@@ -5,7 +5,9 @@ public abstract class MapEntity {
         this.location = startingLocation;
     }
 
-    public void setLocation(Tile newLocation) {
-
+    public final void setLocation(Tile newLocation) {
+        location.removeEntity(this);
+        newLocation.addEntity(this);
+        this.location = newLocation;
     }
 }
