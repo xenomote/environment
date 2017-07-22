@@ -1,3 +1,7 @@
+package environment.map;
+
+import environment.entities.MapEntity;
+
 import java.util.ArrayList;
 
 public class Tile {
@@ -14,7 +18,7 @@ public class Tile {
     }
 
     public ArrayList<MapEntity> getEntities() {
-        return entities;
+        return new ArrayList<>(entities);
     }
 
     public void addEntity(MapEntity entity) {

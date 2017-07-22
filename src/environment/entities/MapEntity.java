@@ -1,7 +1,12 @@
+package environment.entities;
+
+import environment.map.Tile;
+
 public abstract class MapEntity {
     private Tile location;
 
     public MapEntity(Tile startingLocation) {
+        startingLocation.addEntity(this);
         this.location = startingLocation;
     }
 
