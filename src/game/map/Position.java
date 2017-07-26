@@ -1,6 +1,8 @@
-package environment.map;
+package game.map;
 
 public class Position {
+    private static final int HASH_FACTOR = 17;
+
     public static final Position ORIGIN = new Position(0, 0);
     public static final Position ONE = new Position(1, 1);
 
@@ -32,8 +34,16 @@ public class Position {
         return new Position(getX() + other.getX(), getY() + other.getY());
     }
 
+    public Position plus(Direction direction) {
+        return plus(direction.relativePosition);
+    }
+
     public Position minus(Position other) {
         return plus(other.negated());
+    }
+
+    public Position minus(Direction direction) {
+        return minus(direction.relativePosition);
     }
 
     public Position negated() {
@@ -86,5 +96,15 @@ public class Position {
         else {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "" + getX() + ":" + getY();
+    }
+
+    @Override
+    public int hashCode() {
+        return (getX() * HASH_FACTOR) ^ getY();
     }
 }
