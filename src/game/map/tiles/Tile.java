@@ -23,7 +23,7 @@ public class Tile {
     public final void transferTo(Move move) {
         if (move.inProgress()) {
             entities.add(move.getEntity());
-            move.hasRecieved();
+            move.hasReceived();
             move.getEntity().move(move);
         }
     }

@@ -8,7 +8,7 @@ public class Move {
     private final Tile from;
     private final Tile to;
     private boolean left;
-    private boolean recieved;
+    private boolean received;
     private boolean updated;
 
     public Move(StaticEntity entity, Tile from, Tile to) {
@@ -16,7 +16,7 @@ public class Move {
         this.from = from;
         this.to = to;
 
-        left = recieved = updated = false;
+        left = received = updated = false;
     }
 
     public StaticEntity getEntity() {
@@ -35,8 +35,8 @@ public class Move {
         left = true;
     }
 
-    public void hasRecieved() {
-        recieved = true;
+    public void hasReceived() {
+        received = true;
     }
 
     public void hasUpdated() {
@@ -44,6 +44,6 @@ public class Move {
     }
 
     public boolean inProgress() {
-        return !(left && recieved && updated);
+        return !(left && received && updated);
     }
 }

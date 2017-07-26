@@ -87,13 +87,17 @@ public class Map {
      * @param second
      */
     public void joinTiles(Position first, Direction direction, Position second) {
-        Tile from = getTile(first);
-        Tile to = getTile(second);
+        if (hasTile(first) && hasTile(second)) {
+            Tile from = getTile(first);
+            Tile to = getTile(second);
 
-        if (from != null && to != null) {
             from.addLink(to, direction);
             to.addLink(from, direction.getOpposite());
         }
+    }
+
+    public boolean hasTile(Position position) {
+        return map.containsKey(position);
     }
 
     public Tile getTile(Position position) {
