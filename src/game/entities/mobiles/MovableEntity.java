@@ -1,5 +1,6 @@
 package game.entities.mobiles;
 
+import game.description.Name;
 import game.map.Direction;
 import game.entities.Entity;
 import game.entities.actions.moves.Move;
@@ -10,7 +11,7 @@ public abstract class MovableEntity extends Entity {
         super(startingLocation);
     }
 
-    public MovableEntity(String name, Tile startingLocation) {
+    public MovableEntity(Name name, Tile startingLocation) {
         super(name, startingLocation);
     }
 
