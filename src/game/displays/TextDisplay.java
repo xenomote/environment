@@ -1,5 +1,6 @@
 package game.displays;
 
+import game.description.Name;
 import game.entities.Entity;
 import game.map.Area;
 import game.map.Map;
@@ -54,7 +55,7 @@ public class TextDisplay implements Display {
     }
 
     private String itemise(Set<Entity> entities) {
-        HashMap<String, Integer> items = new HashMap<>();
+        HashMap<Name, Integer> items = new HashMap<>();
         entities.forEach(entity -> items.put(entity.getName(), items.getOrDefault(entity.getName(), 0) + 1));
         String itemisation = "";
         // TODO: 30/07/2017 fix
