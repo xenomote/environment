@@ -5,6 +5,7 @@ import game.map.tiles.Tile;
 import static game.map.Position.*;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Map {
     private final HashMap<Position, Tile> map;
@@ -104,8 +105,8 @@ public class Map {
         return map.get(position);
     }
 
-    public HashMap<Position, Tile> getMap() {
-        return new HashMap<>(map);
+    public HashSet<Tile> getTiles() {
+        return new HashSet<>(map.values());
     }
 
     public Position getTopLeft() {

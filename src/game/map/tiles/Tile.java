@@ -1,14 +1,14 @@
 package game.map.tiles;
 
 import game.map.Direction;
-import game.map.tiles.entities.StaticEntity;
-import game.map.tiles.entities.moves.Move;
+import game.entities.Entity;
+import game.entities.actions.moves.Move;
 
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class Tile {
-    private final HashSet<StaticEntity> entities;
+    private final HashSet<Entity> entities;
     private final HashMap<Direction, Tile> links;
 
     public Tile() {
@@ -16,15 +16,15 @@ public class Tile {
         this.links = new HashMap<>();
     }
 
-    public HashSet<StaticEntity> getEntities() {
+    public HashSet<Entity> getEntities() {
         return new HashSet<>(entities);
     }
 
     public final void transferTo(Move move) {
         if (move.inProgress()) {
             entities.add(move.getEntity());
-            move.hasReceived();
-            move.getEntity().move(move);
+            move.hasArrived();
+            move.getStart().transferFrom(move);
         }
     }
 
@@ -32,7 +32,7 @@ public class Tile {
         if (move.inProgress()) {
             entities.remove(move.getEntity());
             move.hasLeft();
-            move.getTo().transferTo(move);
+            move.getDestination().transferTo(move);
         }
     }
 
