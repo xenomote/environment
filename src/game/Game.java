@@ -18,10 +18,16 @@ public class Game {
         map.joinTiles();
 
         Tree tree = new Tree(map.getTile(ORIGIN));
+        Tree tree2 = new Tree(map.getTile(ORIGIN));
+
+        System.out.println(tree.getName().hashCode());
+        System.out.println(tree2.getName().hashCode());
 
         System.out.println(map.getTopLeft());
         System.out.println(map.getBottomRight());
         System.out.println(map.getArea());
+
+        display.examine(map, ORIGIN);
 
         display.display(map);
     }

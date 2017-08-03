@@ -24,7 +24,7 @@ public abstract class Entity {
 
     public Set<Action> generateActions() {
         return new HashSet<>();
-    };
+    }
 
     public final void move(Move move) {
         if (move.inProgress()) {

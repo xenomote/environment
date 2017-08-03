@@ -1,8 +1,6 @@
 package game.description;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Description {
     private static final HashMap<Integer, String> onesMap = new HashMap<>();
@@ -33,10 +31,10 @@ public class Description {
         tensMap.put(1, "ten");
 
         powerGroupNames = new String[]{
-                "thousand", "million", "billion", "trillion", "quadrillion"
+                "", "thousand", "million", "billion", "trillion", "quadrillion"
         };
 
-        MAX_DIGITS = powerGroupNames.length * 3 + 3;
+        MAX_DIGITS = powerGroupNames.length * 3;
     }
 
     public static void main(String[] args) {
@@ -45,41 +43,40 @@ public class Description {
         }
     }
 
+    public static String numerate(int number) {
+        return numerate("" + number);
+    }
+
     public static String numerate(String number) {
         if (number.length() > MAX_DIGITS) {
-            char[] maxNo = new char[MAX_DIGITS];
-            Arrays.fill(maxNo, '9');
-            throw new IndexOutOfBoundsException("Maximum magnitude describable is " + new String(maxNo) +  ", got " + number);
+            String maxGroup = powerGroupNames[powerGroupNames.length - 1];
+            throw new IndexOutOfBoundsException("Can only describe numbers less than one " + maxGroup + ", got " + number);
         }
+
+        int highestPower = number.length() - 1;
+        int highestPowerGroup = highestPower / 3;
+        String description = "";
 
         int[] hundreds = divideByPowerGroups(number);
         int lowest = hundreds[0];
+        int highest = hundreds[highestPowerGroup];
 
-        int highestPower = number.length();
-        int highestPowerGroup = highestPower / 3;
-        LinkedList<String> description = new LinkedList<>();
+        if (highest != 0) description += generateHundredsName(highest, highestPowerGroup);
 
-        boolean needsComma = false;
-        for (int i = 1; i < highestPowerGroup + 1; i++) {
-            if (hundreds[i] != 0) {
-                if (needsComma) description.addFirst(", ");
-                description.addFirst(" " + powerGroupNames[i - 1]);
-                description.addFirst(numerateHundreds(hundreds[i]));
-                needsComma = true;
-            }
+        for (int i = hundreds.length - 1; i > 1; i--) {
+            if (hundreds[i] != 0) description += ", " + generateHundredsName(hundreds[i], i);
         }
 
-        if (lowest != 0) {
-            description.addLast(lowest < 100 ? " and " : ", ");
-            description.addLast(numerateHundreds(hundreds[0]));
+        if (lowest != 0 && highestPowerGroup != 0) {
+            description += lowest < 100 ? " and " : ", ";
+            description += generateHundredsName(lowest, 0);
         }
-
 
         return String.join("", description);
     }
 
     private static int[] divideByPowerGroups(String number) {
-        int[] powerGroups = new int[powerGroupNames.length + 1];
+        int[] powerGroups = new int[powerGroupNames.length];
         int highestPower = number.length();
         int highestPowerGroup = highestPower / 3;
 
@@ -91,6 +88,10 @@ public class Description {
         }
 
         return powerGroups;
+    }
+
+    private static String generateHundredsName(int number, int powerGroup) {
+        return (numerateHundreds(number) + " " + powerGroupNames[powerGroup]).trim();
     }
 
     private static String numerateHundreds(int number) {

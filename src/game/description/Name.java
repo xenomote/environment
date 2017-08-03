@@ -23,7 +23,40 @@ public class Name {
         return plural;
     }
 
-    public String getQualifiedName() {
+    public String getFullName() {
         return qualifier + " " + name;
+    }
+
+    public String getFullName(int number) {
+        if (number == 1) {
+            return getFullName();
+        }
+
+        else {
+            return Description.numerate(number) + " " + getPlural();
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (super.equals(obj)) {
+            return true;
+        }
+
+        else if (obj instanceof Name) {
+            Name name = ((Name) obj);
+            return
+                    getQualifier().equals(name.getQualifier()) &&
+                    getName().equals(name.getName()) &&
+                    getPlural().equals(name.getPlural());
+
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return getQualifier().hashCode() ^ getName().hashCode() ^ getPlural().hashCode();
     }
 }
