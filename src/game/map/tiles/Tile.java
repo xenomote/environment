@@ -1,5 +1,6 @@
 package game.map.tiles;
 
+import game.entities.EntityManager;
 import game.map.Direction;
 import game.entities.Entity;
 import game.entities.actions.moves.Move;
@@ -7,12 +8,12 @@ import game.entities.actions.moves.Move;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class Tile {
-    private final HashSet<Entity> entities;
+public class Tile{
+    private final EntityManager entities;
     private final HashMap<Direction, Tile> links;
 
     public Tile() {
-        this.entities = new HashSet<>();
+        this.entities = new EntityManager();
         this.links = new HashMap<>();
     }
 
@@ -44,7 +45,7 @@ public class Tile {
         links.remove(direction);
     }
 
-    public Tile getAdjacent(Direction direction) {
+    public Tile getAdjacentOrThis(Direction direction) {
         return links.getOrDefault(direction, this);
     }
 
