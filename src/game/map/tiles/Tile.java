@@ -8,33 +8,11 @@ import game.entities.actions.moves.Move;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class Tile{
-    private final EntityManager entities;
+public class Tile extends EntityManager{
     private final HashMap<Direction, Tile> links;
 
     public Tile() {
-        this.entities = new EntityManager();
         this.links = new HashMap<>();
-    }
-
-    public HashSet<Entity> getEntities() {
-        return new HashSet<>(entities);
-    }
-
-    public final void transferTo(Move move) {
-        if (move.inProgress()) {
-            entities.add(move.getEntity());
-            move.hasArrived();
-            move.getStart().transferFrom(move);
-        }
-    }
-
-    public final void transferFrom(Move move) {
-        if (move.inProgress()) {
-            entities.remove(move.getEntity());
-            move.hasLeft();
-            move.getDestination().transferTo(move);
-        }
     }
 
     public void addLink(Tile tile, Direction direction) {

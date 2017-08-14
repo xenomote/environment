@@ -44,14 +44,12 @@ public class TextDisplay implements Display {
             return "There is nothing here";
         }
 
-        HashSet<Entity> entities = tile.getEntities();
-
-        if (entities.isEmpty()) {
+        if (tile.isEmpty()) {
             return "This area is empty";
         }
 
         else {
-            return itemise(entities);
+            return itemise(tile);
         }
     }
 
@@ -81,7 +79,7 @@ public class TextDisplay implements Display {
             return ' ';
         }
 
-        else if (tile.getEntities().isEmpty()) {
+        else if (tile.isEmpty()) {
             return '_';
         }
 

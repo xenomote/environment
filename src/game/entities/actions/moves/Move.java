@@ -8,21 +8,18 @@ public class Move implements Action {
     private final Entity entity;
     private final Tile start;
     private final Tile destination;
-    private boolean left;
-    private boolean arrived;
-    private boolean updated;
 
     public Move(Entity entity, Tile destination) {
         this.entity = entity;
         this.start = entity.getLocation();
         this.destination = destination;
-
-        left = arrived = updated = false;
     }
 
     @Override
     public void executeAction() {
-        entity.move(this);
+        entity.move(destination);
+        start.remove(entity);
+        destination.add(entity);
     }
 
     public Entity getEntity() {
@@ -35,21 +32,5 @@ public class Move implements Action {
 
     public Tile getDestination() {
         return destination;
-    }
-
-    public void hasLeft() {
-        left = true;
-    }
-
-    public void hasArrived() {
-        arrived = true;
-    }
-
-    public void hasUpdated() {
-        updated = true;
-    }
-
-    public boolean inProgress() {
-        return !(left && arrived && updated);
     }
 }

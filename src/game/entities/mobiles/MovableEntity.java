@@ -16,6 +16,6 @@ public abstract class MovableEntity extends Entity {
     }
 
     public void move(Direction direction) {
-        move(new Move(this, getLocation().getAdjacent(direction)));
+        move(getLocation().getAdjacentOrThis(direction));
     }
 }

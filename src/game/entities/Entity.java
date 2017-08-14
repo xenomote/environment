@@ -18,20 +18,16 @@ public abstract class Entity {
 
     public Entity(Name name, Tile startingLocation) {
         this.name = name;
-        this.location = new Tile();
-        move(new Move(this, startingLocation));
+        this.location = startingLocation;
+        startingLocation.add(this);
     }
 
     public Set<Action> generateActions() {
         return new HashSet<>();
     }
 
-    public final void move(Move move) {
-        if (move.inProgress()) {
-            this.location = move.getDestination();
-            move.hasUpdated();
-            move.getDestination().transferTo(move);
-        }
+    public void move(Tile location) {
+        this.location = location;
     }
 
     public Tile getLocation() {
